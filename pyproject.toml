@@ -14,10 +14,7 @@ iscc-core = "^0.2"
 fastapi = "^0.75"
 uvicorn = "^0.17"
 jcs = "^0.2.0"
-uvloop = { version = "*", optional = true}
 
-[tool.poetry.extras]
-uvloop = ["uvloop"]
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1"
@@ -29,9 +26,9 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poe.tasks]
-reqs = { cmd = "poetry export -o requirements.txt --extras uvloop", help = "Update requirements.txt"}
+reqs = { cmd = "poetry export -o requirements.txt", help = "Update requirements.txt"}
 format = { cmd = "black .", help = "run black code formatter"}
 test   = { cmd = "pytest", help = "run tests"}
 develop = { cmd = "uvicorn --reload --workers 1 --log-level debug --header server:iscc iscc_flake.main:app", help = "run development server"}
-serve = { cmd = "uvicorn --host 0.0.0.0 --port 8080 --workers 1 --loop uvloop --log-level info  --no-server-header iscc_flake.main:app", help = "run development server"}
+serve = { cmd = "uvicorn --host 0.0.0.0 --port 8080 --workers 1 --log-level info iscc_flake.main:app", help = "run development server"}
 all = ["reqs", "format", "test",]
