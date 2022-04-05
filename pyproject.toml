@@ -26,7 +26,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poe.tasks]
-reqs = { cmd = "poetry export -o requirements.txt", help = "Update requirements.txt"}
+reqs = { cmd = "poetry export --without-hashes -o requirements.txt", help = "Update requirements.txt"}
 format = { cmd = "black .", help = "run black code formatter"}
 test   = { cmd = "pytest", help = "run tests"}
 develop = { cmd = "uvicorn --reload --workers 1 --log-level debug --header server:iscc iscc_flake.main:app", help = "run development server"}
