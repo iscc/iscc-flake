@@ -24,6 +24,7 @@ typing-extensions==4.1.1; python_version < "3.8" and python_version >= "3.7" and
 typing-validation==0.0.1.post7; python_version >= "3.7" and python_version < "4.0"
 uvarint==1.2.0; python_version >= "3.7" and python_version < "4.0"
 uvicorn==0.17.6; python_version >= "3.7"
+uvloop==0.16.0; python_version >= "3.7"
 win32-setctime==1.1.0; python_version >= "3.7" and python_version < "4.0" and sys_platform == "win32"
 xxhash==3.0.0; python_version >= "3.7" and python_version < "4.0"
 zipp==3.8.0; python_version < "3.8" and python_version >= "3.7"

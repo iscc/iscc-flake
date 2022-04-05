@@ -1,6 +1,13 @@
 # ISCC - Flake Microservice
 
-A microservice for distributed ID generation.
+**A microservice for generating unique identifiers for distributed computing.**
+
+
+The [ISCC Flake-Code](https://core.iscc.codes/units/code_flake/) is unique, time-sorted identifier
+composed of an 48-bit timestamp and 16 to 208 bit randomness.
+
+It is a flexible implementation of a [Snowflake ID](https://en.wikipedia.org/wiki/Snowflake_ID) 
+that can be generated in various bit-sizes and converted into different representations.
 
 
 # Development

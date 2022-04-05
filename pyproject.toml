@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "iscc-flake"
-version = "0.1.0"
+version = "0.2.0"
 description = "ISCC - Flake Microservice"
 authors = ["Titusz <tp@py7.de>"]
 license = "Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/iscc/iscc-flake"
-keywords=["iscc", "identifier", "media", "content", "hash", "blockchain", "similarity"]
+keywords=["iscc", "identifier", "snowflake", "media", "content"]
 
 [tool.poetry.dependencies]
 python = ">=3.7,<4.0"
@@ -14,21 +14,30 @@ iscc-core = "^0.2"
 fastapi = "^0.75"
 uvicorn = "^0.17"
 jcs = "^0.2.0"
+uvloop = { version = "^0.16", optional  = true}
 
+[tool.poetry.extras]
+uvloop = ["uvloop"]
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1"
 poethepoet = "^0.13.1"
 black = "^22.3.0"
+requests = "^2.27.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.black]
+skip-string-normalization = false
+line-length = 100
+target-version = ['py37']
+
 [tool.poe.tasks]
-reqs = { cmd = "poetry export --without-hashes -o requirements.txt", help = "Update requirements.txt"}
+reqs = { cmd = "poetry export --without-hashes --extras uvloop -o requirements.txt", help = "update requirements.txt"}
 format = { cmd = "black .", help = "run black code formatter"}
 test   = { cmd = "pytest", help = "run tests"}
 develop = { cmd = "uvicorn --reload --workers 1 --log-level debug --header server:iscc iscc_flake.main:app", help = "run development server"}
-serve = { cmd = "uvicorn --host 0.0.0.0 --port 8080 --workers 1 --log-level info iscc_flake.main:app", help = "run development server"}
+serve = { cmd = "uvicorn --host 0.0.0.0 --port 8080 --workers 1 --loop uvloop --log-level info iscc_flake.main:app", help = "run development server"}
 all = ["reqs", "format", "test",]
